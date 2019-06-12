@@ -95,7 +95,7 @@ public class MyProperty {
             return;
         }
 
-        properties.getProperty(outputDirectory, value);
+        properties.setProperty(outputDirectory, value);
     }
 
     /**

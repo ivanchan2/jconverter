@@ -5,8 +5,8 @@
  */
 package com.f.converter;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.xml.internal.ws.resources.AddressingMessages;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -15,11 +15,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
 
 
 /**
@@ -275,14 +273,6 @@ public class ConverterGui extends javax.swing.JFrame {
 
     private void textFieldSourceDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldSourceDirectoryActionPerformed
         // TODO add your handling code here:
-//        String fileDirectory = textFieldSourceDirectory.getText().trim().toLowerCase();
-//
-//        File directory = new File(fileDirectory);
-//        if (!directory.isDirectory()) {
-//            addMessageLine(String.format("資料夾(%s)不存在", fileDirectory));
-//            return;
-//        }
-
         updateFileList(textFieldSourceDirectory.getText().trim().toLowerCase());
 
     }//GEN-LAST:event_textFieldSourceDirectoryActionPerformed
@@ -395,12 +385,42 @@ public class ConverterGui extends javax.swing.JFrame {
      * 轉換所有檔案
      */
     private void convertAll() {
+        textAreaMessage.setText("");
+
+        String outputDirectoryString = textFieldOutputDirectory.getText().trim().toLowerCase();
+        File outputDirectory = new File(outputDirectoryString);
+        if (!outputDirectory.exists() || !outputDirectory.isDirectory()) {
+            addMessageLine("輸出的資料夾不存在");
+            return;
+        }
+
         for (int i = 0 ; i < tableFileList.getRowCount() ; ++i) {
             if (tableFileList.getValueAt(i, 0) ==  Boolean.FALSE)
                 continue;
 
             String filePath = (String)tableFileList.getValueAt(i, 1);
-            convert(filePath);
+
+            addMessageLine(String.format("開始轉換檔案 : %s", filePath));
+
+            String jsonString = generateJsonString(filePath);
+            if (jsonString.isEmpty())
+                continue;
+
+            try {
+                String outFilePath = String.format("%s.json", filePath.substring(0, filePath.length() - 5));
+
+                FileWriter writer = new FileWriter(outFilePath);
+
+                writer.write(jsonString);
+                writer.flush();
+                writer.close();
+            } catch (Exception e) {
+                addMessageLine("寫入檔案錯誤 : " + e.toString());
+            }
+
+            addMessageLine(String.format("轉欓完成"));
+            addMessageLine("");
+
         }
 
         updateProperties();
@@ -411,7 +431,7 @@ public class ConverterGui extends javax.swing.JFrame {
      *
      * @param filePath 要轉換的檔案路徑
      */
-    private void convert(String filePath) {
+    private String generateJsonString(String filePath) {
         File file = new File(filePath);
 
         try {
@@ -430,7 +450,7 @@ public class ConverterGui extends javax.swing.JFrame {
 
             if (lastRow <= 0) {
                 addMessageLine("沒有任何Row資料");
-                return;
+                return "";
             }
 
             addMessageLine(String.format("總共%d筆資料", lastRow + 1));
@@ -444,7 +464,7 @@ public class ConverterGui extends javax.swing.JFrame {
 
             if (lastRow <= 0) {
                 addMessageLine("沒有任何Column資料");
-                return;
+                return "";
             }
 
             addMessageLine(String.format("總共%d個欄位", lastColumn + 1));
@@ -463,18 +483,20 @@ public class ConverterGui extends javax.swing.JFrame {
                 if (row == null)
                     continue;
 
+                addMessageLine(String.format("正在處理第%d筆資料", i + 1));
+
                 for (int j = 0 ; j <= lastColumn ; ++j) {
                     Cell cell = row.getCell(j);
                     if (cell == null) {
                         addMessageLine(String.format("第%d行, 第%d列 : 沒有資料", i + 1, j + 1));
-                        return;
+                        return "";
                     }
 
                     String value = cell.toString().trim();
 
                     if (value.isEmpty()) {
                         addMessageLine(String.format("第%d行, 第%d列 : 沒有資料", i + 1, j + 1));
-                        return;
+                        return "";
                     }
 
                     if (i == 0) {
@@ -483,7 +505,7 @@ public class ConverterGui extends javax.swing.JFrame {
                     else if (i == 1) {
                         if (!value.equals("boolean") && !value.equals("int") && !value.equals("String") && !value.equals("float")) {
                             addMessageLine(String.format("第%d行, 第%d列 : 資料型態錯誤", i + 1, j + 1));
-                            return;
+                            return "";
                         }
 
                         types.add(value);
@@ -492,17 +514,24 @@ public class ConverterGui extends javax.swing.JFrame {
                         if (j == 0) {
                             if (!value.equals("ID")) {
                                 addMessageLine(String.format("第%d行, 第%d列 : 的資料必須為ID", i + 1, j + 1));
-                                return;
+                                return "";
                             }
                         }
 
                         variables.add(cell.toString());
                     }
                     else {
+                        if (i == 3 && j == 0) {
+                            builder.append("[");
+                        }
+
                         if (j == 0) {
-                            builder.append("{");
+                            if (i > 3)
+                                builder.append(", {");
+                            else
+                                builder.append("{");
                         } else {
-                            builder.append(",");
+                            builder.append(", ");
                         }
 
                         if (types.get(j).equals("String"))
@@ -512,39 +541,21 @@ public class ConverterGui extends javax.swing.JFrame {
 
                         if (j == lastColumn) {
                             builder.append("}");
+
+                            if (i == lastRow)
+                                builder.append("]");
                         }
                     }
-
-                    addMessage(cell.toString() + "\t");
                 }
 
-                addMessageLine("");
             }
 
-            addMessageLine("comments:");
-            for (int i = 0 ; i < comments.size() ; ++i) {
-                addMessage(comments.get(i) + "\t");
-            }
-            addMessageLine("");
-
-            addMessageLine("types:");
-            for (int i = 0 ; i < types.size() ; ++i) {
-                addMessage(types.get(i) + "\t");
-            }
-            addMessageLine("");
-
-            addMessageLine("variables:");
-            for (int i = 0 ; i < variables.size() ; ++i) {
-                addMessage(variables.get(i) + "\t");
-            }
-            addMessageLine("");
-
-            addMessageLine("builder:");
-            addMessage(builder.toString());
-            addMessageLine("");
+            return builder.toString();
 
         } catch (Exception e) {
             addMessageLine(e.toString());
+
+            return "";
         }
     }
 
@@ -565,6 +576,7 @@ public class ConverterGui extends javax.swing.JFrame {
         properties.initial();
 
         textFieldSourceDirectory.setText(properties.getSourceDirectory());
+        textFieldOutputDirectory.setText(properties.getOutputDirectory());
 
         updateFileList(textFieldSourceDirectory.getText());
     }

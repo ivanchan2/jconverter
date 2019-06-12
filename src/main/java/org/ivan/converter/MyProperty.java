@@ -1,4 +1,4 @@
-package com.f.converter;
+package org.ivan.converter;
 
 import java.io.File;
 import java.io.FileInputStream;

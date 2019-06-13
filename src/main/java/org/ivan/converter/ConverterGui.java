@@ -324,11 +324,11 @@ public class ConverterGui extends javax.swing.JFrame {
      * @param directory 被選取的資料夾
      */
     private void updateFileList(File directory) {
+        // 取得檔案列表
         String[] nameList = new String[0];
         if (!directory.exists() || !directory.isDirectory()) {
             // 因為tableFileList.removeAll()不知道為什麼沒有更新UI, 所以只好塞給他空的資料讓他清空file list
         } else {
-            // 取得檔案列表
             nameList = directory.list((File dir, String name) -> {
                 if (name.toLowerCase().endsWith(".xlsx")) {
                     return true;

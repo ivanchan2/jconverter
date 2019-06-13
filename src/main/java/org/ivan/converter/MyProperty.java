@@ -1,5 +1,8 @@
 package org.ivan.converter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,6 +14,8 @@ import java.util.Properties;
  * @author ivan.chen
  */
 public class MyProperty {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+
     /**
      * properties的檔案路徑
      */
@@ -29,12 +34,16 @@ public class MyProperty {
      */
     public void initial() {
         try {
+            logger.info("Start initial MyProperty.");
+
             properties = new Properties();
 
             File file = new File(filePath);
             if (file.exists()) {
                 properties.load(new FileInputStream(file));
             }
+
+            logger.info("End initial MyProperty.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,7 +72,7 @@ public class MyProperty {
      */
     public void setSourceDirectory(String value) {
         if (properties == null) {
-            System.out.print("properties not initial.");
+            logger.error("properties not initial.");
             return;
         }
 
@@ -77,7 +86,7 @@ public class MyProperty {
      */
     public String getSourceDirectory() {
         if (properties == null) {
-            System.out.print("properties not initial.");
+            logger.error("properties not initial.");
             return "";
         }
 
@@ -91,7 +100,7 @@ public class MyProperty {
      */
     public void setOutputDirectory(String value) {
         if (properties == null) {
-            System.out.print("properties not initial.");
+            logger.error("properties not initial.");
             return;
         }
 
@@ -105,7 +114,7 @@ public class MyProperty {
      */
     public String getOutputDirectory() {
         if (properties == null) {
-            System.out.print("properties not initial.");
+            logger.error("properties not initial.");
             return "";
         }
 

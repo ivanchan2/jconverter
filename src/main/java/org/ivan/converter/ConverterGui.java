@@ -9,6 +9,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.io.File;
@@ -24,6 +26,8 @@ import java.util.List;
  * @author ivan.chen
  */
 public class ConverterGui extends javax.swing.JFrame {
+    private final Logger logger = LoggerFactory.getLogger(this.getName().getClass());
+
     /**
      * Creates new form ConverterGui
      */
@@ -83,29 +87,29 @@ public class ConverterGui extends javax.swing.JFrame {
         javax.swing.GroupLayout panelSourceDirectoryLayout = new javax.swing.GroupLayout(panelSourceDirectory);
         panelSourceDirectory.setLayout(panelSourceDirectoryLayout);
         panelSourceDirectoryLayout.setHorizontalGroup(
-            panelSourceDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSourceDirectoryLayout.createSequentialGroup()
-                .addGroup(panelSourceDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelSourceDirectoryLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(textFieldSourceDirectory, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSourceDirectoryLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(butttonSourceDirectorySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                panelSourceDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSourceDirectoryLayout.createSequentialGroup()
+                                .addGroup(panelSourceDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panelSourceDirectoryLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(jLabel1)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(textFieldSourceDirectory, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSourceDirectoryLayout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(butttonSourceDirectorySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())
         );
         panelSourceDirectoryLayout.setVerticalGroup(
-            panelSourceDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSourceDirectoryLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textFieldSourceDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(butttonSourceDirectorySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                panelSourceDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelSourceDirectoryLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textFieldSourceDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(butttonSourceDirectorySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
         textFieldSourceDirectory.getAccessibleContext().setAccessibleName("");
@@ -130,45 +134,45 @@ public class ConverterGui extends javax.swing.JFrame {
         javax.swing.GroupLayout panelTargetJsonDirectoryLayout = new javax.swing.GroupLayout(panelTargetJsonDirectory);
         panelTargetJsonDirectory.setLayout(panelTargetJsonDirectoryLayout);
         panelTargetJsonDirectoryLayout.setHorizontalGroup(
-            panelTargetJsonDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTargetJsonDirectoryLayout.createSequentialGroup()
-                .addGroup(panelTargetJsonDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelTargetJsonDirectoryLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(textFieldOutputDirectory, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTargetJsonDirectoryLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(butttonOutputDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                panelTargetJsonDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelTargetJsonDirectoryLayout.createSequentialGroup()
+                                .addGroup(panelTargetJsonDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panelTargetJsonDirectoryLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(jLabel2)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(textFieldOutputDirectory, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTargetJsonDirectoryLayout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(butttonOutputDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())
         );
         panelTargetJsonDirectoryLayout.setVerticalGroup(
-            panelTargetJsonDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTargetJsonDirectoryLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textFieldOutputDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(butttonOutputDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                panelTargetJsonDirectoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelTargetJsonDirectoryLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textFieldOutputDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(butttonOutputDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
         tableFileList.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null}
-            },
-            new String [] {
-                "確認", "檔案列表"
-            }
+                new Object[][]{
+                        {null, null}
+                },
+                new String[]{
+                        "確認", "檔案列表"
+                }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class
+            Class[] types = new Class[]{
+                    java.lang.Boolean.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
         tableFileList.getTableHeader().setResizingAllowed(false);
@@ -188,59 +192,59 @@ public class ConverterGui extends javax.swing.JFrame {
         javax.swing.GroupLayout panelFileListLayout = new javax.swing.GroupLayout(panelFileList);
         panelFileList.setLayout(panelFileListLayout);
         panelFileListLayout.setHorizontalGroup(
-            panelFileListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFileListLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(buttonConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+                panelFileListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFileListLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(buttonConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
         );
         panelFileListLayout.setVerticalGroup(
-            panelFileListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFileListLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                panelFileListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelFileListLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout panelLeftLayout = new javax.swing.GroupLayout(panelLeft);
         panelLeft.setLayout(panelLeftLayout);
         panelLeftLayout.setHorizontalGroup(
-            panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLeftLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelFileList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelSourceDirectory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelTargetJsonDirectory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelLeftLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(panelFileList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(panelSourceDirectory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(panelTargetJsonDirectory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         panelLeftLayout.setVerticalGroup(
-            panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLeftLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelSourceDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelTargetJsonDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
-                .addComponent(panelFileList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelLeftLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(panelSourceDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(panelTargetJsonDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                                .addComponent(panelFileList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(panelLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(panelLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         pack();
@@ -323,8 +327,7 @@ public class ConverterGui extends javax.swing.JFrame {
         String[] nameList = new String[0];
         if (!directory.exists() || !directory.isDirectory()) {
             // 因為tableFileList.removeAll()不知道為什麼沒有更新UI, 所以只好塞給他空的資料讓他清空file list
-        }
-        else {
+        } else {
             // 取得檔案列表
             nameList = directory.list((File dir, String name) -> {
                 if (name.toLowerCase().endsWith(".xlsx")) {
@@ -337,23 +340,23 @@ public class ConverterGui extends javax.swing.JFrame {
 
         // 更新檔案列表UI
         Object[][] data = new Object[nameList.length][tableFileList.getColumnCount()];
-        for (int i = 0 ; i < nameList.length ; ++i) {
+        for (int i = 0; i < nameList.length; ++i) {
             data[i][0] = Boolean.FALSE;
             data[i][1] = String.format("%s/%s", directory.getPath(), nameList[i]);
         }
 
         tableFileList.setModel(new javax.swing.table.DefaultTableModel(
                 data,
-                new String [] {
+                new String[]{
                         "確認", "檔案列表"
                 }
         ) {
-            Class[] types = new Class [] {
+            Class[] types = new Class[]{
                     java.lang.Boolean.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
         tableFileList.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -376,6 +379,7 @@ public class ConverterGui extends javax.swing.JFrame {
      * @param message 要新增的訊息文字
      */
     private void addMessage(String message) {
+        logger.info(message);
         textAreaMessage.append(message);
     }
 
@@ -388,15 +392,16 @@ public class ConverterGui extends javax.swing.JFrame {
         String outputDirectoryString = textFieldOutputDirectory.getText().trim().toLowerCase();
         File outputDirectory = new File(outputDirectoryString);
         if (!outputDirectory.exists() || !outputDirectory.isDirectory()) {
+            logger.error("輸出的資料夾不存在");
             addMessageLine("輸出的資料夾不存在");
             return;
         }
 
-        for (int i = 0 ; i < tableFileList.getRowCount() ; ++i) {
-            if (tableFileList.getValueAt(i, 0) ==  Boolean.FALSE)
+        for (int i = 0; i < tableFileList.getRowCount(); ++i) {
+            if (tableFileList.getValueAt(i, 0) == Boolean.FALSE)
                 continue;
 
-            String filePath = (String)tableFileList.getValueAt(i, 1);
+            String filePath = (String) tableFileList.getValueAt(i, 1);
 
             addMessageLine(String.format("開始轉換檔案 : %s", filePath));
 
@@ -413,7 +418,8 @@ public class ConverterGui extends javax.swing.JFrame {
                 writer.flush();
                 writer.close();
             } catch (Exception e) {
-                addMessageLine("寫入檔案錯誤 : " + e.toString());
+                logger.error("寫入檔案錯誤 : {}", e.toString());
+                addMessageLine("寫入檔案錯誤 : {}" + e.toString());
             }
 
             addMessageLine(String.format("轉欓完成"));
@@ -441,7 +447,7 @@ public class ConverterGui extends javax.swing.JFrame {
 
             // 因為資料表最後都會多出空白的row或者column, 所以必須手動挑出最後的row跟column數(PS:資料表不能有空值)
             int lastRow = sheet.getPhysicalNumberOfRows() - 1;
-            for( ; lastRow >= 0 ; --lastRow) {
+            for (; lastRow >= 0; --lastRow) {
                 if (!sheet.getRow(lastRow).getCell(0).toString().isEmpty())
                     break;
             }
@@ -455,7 +461,7 @@ public class ConverterGui extends javax.swing.JFrame {
 
             Row firstRow = sheet.getRow(0);
             int lastColumn = firstRow.getPhysicalNumberOfCells() - 1;
-            for ( ; lastColumn >= 0 ; --lastColumn) {
+            for (; lastColumn >= 0; --lastColumn) {
                 if (!firstRow.getCell(lastColumn).toString().isEmpty())
                     break;
             }
@@ -476,14 +482,14 @@ public class ConverterGui extends javax.swing.JFrame {
             // 要輸出的所有字串
             StringBuilder builder = new StringBuilder();
 
-            for (int i = 0 ; i <= lastRow ; ++i) {
+            for (int i = 0; i <= lastRow; ++i) {
                 Row row = sheet.getRow(i);
                 if (row == null)
                     continue;
 
                 addMessageLine(String.format("正在處理第%d筆資料", i + 1));
 
-                for (int j = 0 ; j <= lastColumn ; ++j) {
+                for (int j = 0; j <= lastColumn; ++j) {
                     Cell cell = row.getCell(j);
                     if (cell == null) {
                         addMessageLine(String.format("第%d行, 第%d列 : 沒有資料", i + 1, j + 1));
@@ -499,16 +505,14 @@ public class ConverterGui extends javax.swing.JFrame {
 
                     if (i == 0) {
                         comments.add(value);
-                    }
-                    else if (i == 1) {
+                    } else if (i == 1) {
                         if (!value.equals("boolean") && !value.equals("int") && !value.equals("String") && !value.equals("float")) {
                             addMessageLine(String.format("第%d行, 第%d列 : 資料型態錯誤", i + 1, j + 1));
                             return "";
                         }
 
                         types.add(value);
-                    }
-                    else if (i == 2) {
+                    } else if (i == 2) {
                         if (j == 0) {
                             if (!value.equals("ID")) {
                                 addMessageLine(String.format("第%d行, 第%d列 : 的資料必須為ID", i + 1, j + 1));
@@ -517,8 +521,7 @@ public class ConverterGui extends javax.swing.JFrame {
                         }
 
                         variables.add(cell.toString());
-                    }
-                    else {
+                    } else {
                         if (i == 3 && j == 0) {
                             builder.append("[");
                         }
@@ -579,7 +582,7 @@ public class ConverterGui extends javax.swing.JFrame {
         updateFileList(textFieldSourceDirectory.getText());
     }
 
-   /**
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {

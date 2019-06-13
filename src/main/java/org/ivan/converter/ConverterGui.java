@@ -392,8 +392,7 @@ public class ConverterGui extends javax.swing.JFrame {
         String outputDirectoryString = textFieldOutputDirectory.getText().trim().toLowerCase();
         File outputDirectory = new File(outputDirectoryString);
         if (!outputDirectory.exists() || !outputDirectory.isDirectory()) {
-            logger.error("輸出的資料夾不存在");
-            addMessageLine("輸出的資料夾不存在");
+            showErrorMessage("輸出的資料夾不存在");
             return;
         }
 
@@ -418,13 +417,10 @@ public class ConverterGui extends javax.swing.JFrame {
                 writer.flush();
                 writer.close();
             } catch (Exception e) {
-                logger.error("寫入檔案錯誤 : {}", e.toString());
-                addMessageLine("寫入檔案錯誤 : {}" + e.toString());
+                showErrorMessage("寫入檔案錯誤 : {}" + e.toString());
             }
 
-            addMessageLine(String.format("轉欓完成"));
-            addMessageLine("");
-
+            infoBox("轉欓完成", "");
         }
 
         updateProperties();
@@ -453,7 +449,7 @@ public class ConverterGui extends javax.swing.JFrame {
             }
 
             if (lastRow <= 0) {
-                addMessageLine("沒有任何Row資料");
+                showErrorMessage("沒有任何Row資料");
                 return "";
             }
 
@@ -467,7 +463,7 @@ public class ConverterGui extends javax.swing.JFrame {
             }
 
             if (lastRow <= 0) {
-                addMessageLine("沒有任何Column資料");
+                showErrorMessage("沒有任何Column資料");
                 return "";
             }
 
@@ -492,14 +488,14 @@ public class ConverterGui extends javax.swing.JFrame {
                 for (int j = 0; j <= lastColumn; ++j) {
                     Cell cell = row.getCell(j);
                     if (cell == null) {
-                        addMessageLine(String.format("第%d行, 第%d列 : 沒有資料", i + 1, j + 1));
+                        showErrorMessage(String.format("第%d行, 第%d列 : 沒有資料", i + 1, j + 1));
                         return "";
                     }
 
                     String value = cell.toString().trim();
 
                     if (value.isEmpty()) {
-                        addMessageLine(String.format("第%d行, 第%d列 : 沒有資料", i + 1, j + 1));
+                        showErrorMessage(String.format("第%d行, 第%d列 : 沒有資料", i + 1, j + 1));
                         return "";
                     }
 
@@ -507,7 +503,7 @@ public class ConverterGui extends javax.swing.JFrame {
                         comments.add(value);
                     } else if (i == 1) {
                         if (!value.equals("boolean") && !value.equals("int") && !value.equals("String") && !value.equals("float")) {
-                            addMessageLine(String.format("第%d行, 第%d列 : 資料型態錯誤", i + 1, j + 1));
+                            showErrorMessage(String.format("第%d行, 第%d列 : 資料型態錯誤", i + 1, j + 1));
                             return "";
                         }
 
@@ -515,7 +511,7 @@ public class ConverterGui extends javax.swing.JFrame {
                     } else if (i == 2) {
                         if (j == 0) {
                             if (!value.equals("ID")) {
-                                addMessageLine(String.format("第%d行, 第%d列 : 的資料必須為ID", i + 1, j + 1));
+                                showErrorMessage(String.format("第%d行, 第%d列 : 的資料必須為ID", i + 1, j + 1));
                                 return "";
                             }
                         }
@@ -554,7 +550,7 @@ public class ConverterGui extends javax.swing.JFrame {
             return builder.toString();
 
         } catch (Exception e) {
-            addMessageLine(e.toString());
+            showErrorMessage(e.toString());
 
             return "";
         }
@@ -580,6 +576,25 @@ public class ConverterGui extends javax.swing.JFrame {
         textFieldOutputDirectory.setText(properties.getOutputDirectory());
 
         updateFileList(textFieldSourceDirectory.getText());
+    }
+
+    /**
+     * 顯示錯誤訊息
+     * @param message 要顯示的訊息
+     */
+    private void showErrorMessage(String message) {
+        logger.error(message);
+        infoBox(message, "錯誤");
+    }
+
+    /**
+     * 顯示訊息視窗
+     * @param infoMessage 要顯示的訊息
+     * @param titleBar 標題
+     */
+    private void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**

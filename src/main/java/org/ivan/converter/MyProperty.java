@@ -3,9 +3,7 @@ package org.ivan.converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -14,6 +12,9 @@ import java.util.Properties;
  * @author ivan.chen
  */
 public class MyProperty {
+    /**
+     * log工具
+     */
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     /**
@@ -30,38 +31,40 @@ public class MyProperty {
     private final String outputDirectory = "outputDirectory";
 
     /**
-     * 初始化資料
+     * {@link Properties}的instance
      */
-    public void initial() {
+    private Properties properties;
+
+    /**
+     * 建立properties
+     *
+     * @throws IOException
+     */
+    public MyProperty() {
+        logger.info("Start initial MyProperty.");
+
+        properties = new Properties();
+
         try {
-            logger.info("Start initial MyProperty.");
-
-            properties = new Properties();
-
             File file = new File(filePath);
             if (file.exists()) {
                 properties.load(new FileInputStream(file));
             }
-
-            logger.info("End initial MyProperty.");
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            logger.error(e.toString());
         }
+
+        logger.info("End initial MyProperty.");
     }
 
     /**
      * 存欓
      */
     public void saveProperties() {
-        if (properties == null) {
-            System.out.print("properties not initial.");
-            return;
-        }
-
         try {
             properties.store(new FileOutputStream(filePath), null);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         }
     }
 
@@ -71,11 +74,6 @@ public class MyProperty {
      * @param value 要儲存的檔案路徑
      */
     public void setSourceDirectory(String value) {
-        if (properties == null) {
-            logger.error("properties not initial.");
-            return;
-        }
-
         properties.setProperty(sourceDirectory, value);
     }
 
@@ -85,11 +83,6 @@ public class MyProperty {
      * @return
      */
     public String getSourceDirectory() {
-        if (properties == null) {
-            logger.error("properties not initial.");
-            return "";
-        }
-
         return properties.getProperty(sourceDirectory);
     }
 
@@ -99,11 +92,6 @@ public class MyProperty {
      * @param value 要輸出的資料夾路徑
      */
     public void setOutputDirectory(String value) {
-        if (properties == null) {
-            logger.error("properties not initial.");
-            return;
-        }
-
         properties.setProperty(outputDirectory, value);
     }
 
@@ -113,13 +101,6 @@ public class MyProperty {
      * @return
      */
     public String getOutputDirectory() {
-        if (properties == null) {
-            logger.error("properties not initial.");
-            return "";
-        }
-
         return properties.getProperty(outputDirectory);
     }
-
-    private Properties properties;
 }

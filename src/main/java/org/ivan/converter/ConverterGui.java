@@ -570,7 +570,6 @@ public class ConverterGui extends javax.swing.JFrame {
      */
     private void initial() {
         properties = new MyProperty();
-        properties.initial();
 
         textFieldSourceDirectory.setText(properties.getSourceDirectory());
         textFieldOutputDirectory.setText(properties.getOutputDirectory());

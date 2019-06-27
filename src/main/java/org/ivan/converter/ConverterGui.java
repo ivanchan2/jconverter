@@ -252,7 +252,6 @@ public class ConverterGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void butttonSourceDirectorySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butttonSourceDirectorySelectActionPerformed
-        // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
@@ -269,18 +268,14 @@ public class ConverterGui extends javax.swing.JFrame {
     }//GEN-LAST:event_butttonSourceDirectorySelectActionPerformed
 
     private void buttonConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConvertActionPerformed
-        // TODO add your handling code here:
         convertAll();
     }//GEN-LAST:event_buttonConvertActionPerformed
 
     private void textFieldSourceDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldSourceDirectoryActionPerformed
-        // TODO add your handling code here:
         updateFileList(textFieldSourceDirectory.getText().trim().toLowerCase());
-
     }//GEN-LAST:event_textFieldSourceDirectoryActionPerformed
 
     private void textFieldOutputDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldOutputDirectoryActionPerformed
-        // TODO add your handling code here:
         String fileDirectory = textFieldOutputDirectory.getText().trim().toLowerCase();
 
         File directory = new File(fileDirectory);
@@ -291,7 +286,6 @@ public class ConverterGui extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldOutputDirectoryActionPerformed
 
     private void butttonOutputDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butttonOutputDirectoryActionPerformed
-        // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 

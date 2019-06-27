@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- log級別 : OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
-<!-- status : log4j系統的層級 -->
+<!-- status : log4j本身的顯示訊息級別 -->
 <!-- monitorInterval：檢查設定的間隔時間 -->
+<!-- 要將全部設定成非同步的話，記得要設定java system property -->
+<!-- (ex : java -jar -DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector a.jar) -->
+<!-- 如果log4j2的啟動訊息有類似(org.apache.logging.log4j.core.async.AsyncLoggerContext@52e9be67] started OK.)代表設定成功 (要設定log4j2的訊息級別為debug以上才看的到)-->
+<!-- reference : https://dzone.com/articles/asynchronous-logging-with-log4j-2 -->
 <configuration status="WARN" monitorInterval="30">
     <!-- 所有的appender -->
     <appenders>

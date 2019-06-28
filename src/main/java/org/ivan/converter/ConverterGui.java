@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -319,43 +321,20 @@ public class ConverterGui extends javax.swing.JFrame {
      */
     private void updateFileList(File directory) {
         // 取得檔案列表
-        String[] nameList = new String[0];
-        if (!directory.exists() || !directory.isDirectory()) {
-            // 因為tableFileList.removeAll()不知道為什麼沒有更新UI, 所以只好塞給他空的資料讓他清空file list
-        } else {
-            nameList = directory.list((File dir, String name) -> {
-                if (name.toLowerCase().endsWith(".xlsx")) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        }
-
-        // 更新檔案列表UI
-        Object[][] data = new Object[nameList.length][tableFileList.getColumnCount()];
-        for (int i = 0; i < nameList.length; ++i) {
-            data[i][0] = Boolean.FALSE;
-            data[i][1] = String.format("%s/%s", directory.getPath(), nameList[i]);
-        }
-
-        tableFileList.setModel(new javax.swing.table.DefaultTableModel(
-                data,
-                new String[]{
-                        "確認", "檔案列表"
-                }
-        ) {
-            Class[] types = new Class[]{
-                    java.lang.Boolean.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+        String[] nameList = directory.list((File dir, String name) -> {
+            if (name.toLowerCase().endsWith(".xlsx")) {
+                return true;
+            } else {
+                return false;
             }
         });
-        tableFileList.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tableFileList.getColumnModel().getColumn(0).setPreferredWidth(50);
-        tableFileList.getColumnModel().getColumn(1).setPreferredWidth(560);
+
+        // 更新檔案列表UI
+        DefaultTableModel tableModel = (DefaultTableModel)tableFileList.getModel();
+        tableModel.setRowCount(0);
+        for (int i = 0; i < nameList.length; ++i) {
+            tableModel.addRow(new Object[] { Boolean.FALSE, String.format("%s/%s", directory.getPath(), nameList[i]) });
+        }
     }
 
     /**

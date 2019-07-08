@@ -270,7 +270,7 @@ public class ConverterGui extends javax.swing.JFrame {
     }//GEN-LAST:event_butttonSourceDirectorySelectActionPerformed
 
     private void buttonConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConvertActionPerformed
-        convertAll();
+        convertAll(); 
     }//GEN-LAST:event_buttonConvertActionPerformed
 
     private void textFieldSourceDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldSourceDirectoryActionPerformed

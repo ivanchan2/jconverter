@@ -69,6 +69,7 @@ public class ConverterGui extends javax.swing.JFrame {
 
         textAreaMessage.setEditable(false);
         textAreaMessage.setColumns(20);
+        
         textAreaMessage.setRows(5);
         jScrollPane1.setViewportView(textAreaMessage);
 

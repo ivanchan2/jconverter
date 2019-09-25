@@ -61,6 +61,7 @@ public class ConverterGui extends javax.swing.JFrame {
         panelFileList = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableFileList = new javax.swing.JTable();
+        
         buttonConvert = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
